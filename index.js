@@ -1,18 +1,28 @@
 
-const admin = require("firebase-admin");
+//const admin = require("firebase-admin"); // this is es5, require is not used in ES6
 
-const serviceAccount = require('./credentials.json');
+import admin from "firebase-admin"; // imports firebase library of tools, es6 syntax instead of above 
+//from es5 if using es6 we need to add type: modules to package.json 
 
-admin.initializeApp({
+//const serviceAccount = require('./credentials'); //es5
+
+import serviceAccount from './credentials.js'; //importing credentials to connect to firebase
+//es6 syntax
+
+admin.initializeApp({ //connects to our firebase project 
   credential: admin.credential.cert(serviceAccount)
-});
+}); //creating a certificate based from out credentials
 
-const db = admin.firestore();  // naming our db 
 
-// can also  const restaurants = db.collection('restaurants'); as a short hand and can place
-// in place of where <db.collection('restaurants')> is being used
+// now we are connected to OUR firebase project & related services
 
-const restaurant = {
+const db = admin.firestore();  // naming our database with variable db, creates a shortcut 
+//to access firestore database
+
+// can also  const restaurantsCol = db.collection('restaurants'); as a short hand and can place
+// in place of where <db.collection('restaurants')> is being used; optional
+
+const restaurant = {  //creating an object -- in this case a specific rest we want to add to our db
   name: 'Mister 01',
   address: '555 N Federal HWY',
   cuisine: 'Pizza',
@@ -22,8 +32,9 @@ const restaurant = {
 
 db.collection('restaurants').add(restaurant)//referencing db, creating a collection named 'restaurants' to it
 //also adding the data from the above added info
-  .then(doc => console.log('Created restaurant', doc.id)) //Will print & include the id created by Firebase
-  .catch(err => console.error(err)) //handling an error
+//restaurantsCol.add(restaurant) //shorthand of above line 
+  .then(doc => console.log('Created restaurant', doc.id)) // handle resolve, what will it do?
+  .catch(err => console.error(err)) //handling an error, what happens if it fails?
 
 
 const restaurant2 = {
@@ -36,9 +47,10 @@ const restaurant2 = {
 async function addRestaurant(data) {
  try { 
   const doc = await db.collection('restaurants').add(data) //setting it to data so that we can reuse
-  console.log('Created restaurant', doc.id)
+  //const doc = await restaurantCol.add(data) shorthand for above line of code
+  console.log('Created restaurant', doc.id) //handle resolve
  } catch(err) {
-   console.error(err)
+   console.error(err) // handle reject
  }
 }
 // calling the function
