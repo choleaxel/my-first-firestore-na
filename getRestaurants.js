@@ -1,21 +1,19 @@
+import { restaurantsCol } from "./connectDb.js";
 
+// import admin from "firebase-admin"; 
 
-import admin from "firebase-admin"; 
+// import serviceAccount from './credentials.js'; 
 
-import serviceAccount from './credentials.js'; 
+// admin.initializeApp({ //connects to our firebase project 
+//   credential: admin.credential.cert(serviceAccount)
+// }); //creating a certificate based from out credentials
 
-admin.initializeApp({ //connects to our firebase project 
-  credential: admin.credential.cert(serviceAccount)
-}); //creating a certificate based from out credentials
+// // now we are connected to OUR firebase project & related services
+// const db = admin.firestore();  // naming our database with variable db, creates a shortcut 
+// //to access firestore database
 
-
-// now we are connected to OUR firebase project & related services
-
-const db = admin.firestore();  // naming our database with variable db, creates a shortcut 
-//to access firestore database
-
-const restaurantsCol = db.collection('restaurants'); //as a short hand and can place
-// in place of where <db.collection('restaurants')> is being used; optional
+// const restaurantsCol = db.collection('restaurants'); //as a short hand and can place
+// // in place of where <db.collection('restaurants')> is being used; optional
 
 
 // //query 
