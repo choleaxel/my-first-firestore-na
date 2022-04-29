@@ -9,6 +9,8 @@ admin.initializeApp({
 
 const db = admin.firestore();  // naming our db 
 
+// can also  const restaurants = db.collection('restaurants'); as a short hand and can place
+// in place of where <db.collection('restaurants')> is being used
 
 const restaurant = {
   name: 'Mister 01',
@@ -18,10 +20,10 @@ const restaurant = {
   phone: '(786) 677-2903',
 }
 
-// db.collection('restaurants').add(restaurant)//referencing db, creating a collection named 'restaurants' to it
-// //also adding the data from the above added info
-//   .then(doc => console.log('Created restaurant', doc.id)) //Will print & include the id created by Firebase
-//   .catch(err => console.error(err)) //handling an error
+db.collection('restaurants').add(restaurant)//referencing db, creating a collection named 'restaurants' to it
+//also adding the data from the above added info
+  .then(doc => console.log('Created restaurant', doc.id)) //Will print & include the id created by Firebase
+  .catch(err => console.error(err)) //handling an error
 
 
 const restaurant2 = {
@@ -40,4 +42,5 @@ async function addRestaurant(data) {
  }
 }
 // calling the function
-addRestaurant(restaurant2)
+addRestaurant(restaurant2) //restaurant2 is being passed in the place of data above
+
